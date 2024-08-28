@@ -1,0 +1,72 @@
+package com.talking_doctor.TalkingDoctor.service;
+
+import com.talking_doctor.TalkingDoctor.dto.DiaryRequest;
+import com.talking_doctor.TalkingDoctor.dto.DiaryResponse;
+import com.talking_doctor.TalkingDoctor.dto.DiaryUpdateRequest;
+import com.talking_doctor.TalkingDoctor.entity.Diary;
+import com.talking_doctor.TalkingDoctor.mapper.DiaryMapper;
+import com.talking_doctor.TalkingDoctor.repository.DiaryRepsitory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+public class DiaryService {
+    @Autowired
+    DiaryMapper diaryMapper;
+
+    @Autowired
+    DiaryRepsitory diaryRepository;
+
+    public int addDiary(DiaryRequest diaryRequest) {
+        Diary diary = diaryMapper.diaryRequestToDiary(diaryRequest);
+        diaryRepository.save(diary);
+        return diary.getId();
+    }
+
+    //    public int updateDiary(DiaryRequest diaryRequest) {
+//        Diary diary = diaryMapper.diaryRequestToDiary(diaryRequest);
+//        diaryRepository.save(diary);
+//        return diary.getId();
+//    }
+    public int updateDiary(int diaryId, DiaryUpdateRequest diaryUpdateRequest) {
+        // ID로 기존 일기 조회
+        Diary existingDiary = diaryRepository.findById(diaryId)
+                .orElseThrow(() -> new RuntimeException("Diary not found with id: " + diaryId));
+
+        // 기존 일기의 내용 업데이트
+        existingDiary.setContent(diaryUpdateRequest.getContent());
+        existingDiary.setUpdatedDatetime(diaryUpdateRequest.getUpdatedDateTime());
+
+        // 변경된 일기 저장
+        diaryRepository.save(existingDiary);
+
+        return existingDiary.getId();
+    }
+
+    //다이어리 작성일로 조회
+    //달력에서 특정 날짜를 클릭했을 때 해당 날짜의 모든 일기 목록을 조회하는 기능을 구현하기 위해 LocalDateTime 대신 LocalDate를 사용
+    //LocalDateTime는 특정 날짜와 시간에 작성된 일기 한 편만 조회하는 경우에 더 적합
+    public List<DiaryResponse> selectDiaryDetailsByDate(LocalDate createdDate) {
+        List<Diary> diaries = diaryRepository.findByCreatedDate(createdDate);
+        List<DiaryResponse> diaryResponseList = diaries.stream()
+                .map(diaryMapper::diaryToDiaryResponse)
+                .collect(Collectors.toList());
+        return diaryResponseList;
+    }
+
+    public void deleteDiary(int diaryId) {
+        diaryRepository.deleteById(diaryId);
+    }
+}
+
+//    //다이어리 아이디로 조회
+//    public DiaryResponse selectDiaryDetailById(int diaryId) {
+//        Diary diary = diaryRepository.findById(diaryId).get();
+//        DiaryResponse diaryResponse = diaryMapper.diaryToDiaryResponse(diary);
+//        return diaryResponse;
+//    }
+
