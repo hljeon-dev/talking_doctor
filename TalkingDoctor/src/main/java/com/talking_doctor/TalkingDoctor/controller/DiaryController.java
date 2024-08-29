@@ -34,13 +34,26 @@ public class DiaryController {
     }
 
     //특정 날짜의 일기 목록 조회
-    @GetMapping("/get/{date}")
-    public ResponseEntity<List<DiaryResponse>> selectDiaryDetailsByDate(
+    @GetMapping("/get/list/{date}")
+    public ResponseEntity<List<DiaryResponse>> selectDiaryListByDate(
             @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-                List<DiaryResponse> diaryResponseList = diaryService.selectDiaryDetailsByDate(date);
+                List<DiaryResponse> diaryResponseList = diaryService.selectDiaryListByDate(date);
                 return ResponseEntity.ok(diaryResponseList);
     }
 
+    //일기 상세보기
+    @GetMapping("/get/{id}")
+    public ResponseEntity<DiaryResponse> getDiaryDetailById(@PathVariable("id") int diaryId) {
+        DiaryResponse diaryResponse = diaryService.getDiaryDetailById(diaryId);
+        return ResponseEntity.ok(diaryResponse);
+    }
+
+    //모든 일기 목록 조회
+    @GetMapping("/get/all")
+    public ResponseEntity<List<DiaryResponse>> getAllDiary() {
+        List<DiaryResponse> diaryResponseList = diaryService.getAllDiary();
+        return ResponseEntity.ok(diaryResponseList);
+    }
     //일기 삭제
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteDiary(@PathVariable int id) {

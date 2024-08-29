@@ -13,4 +13,7 @@ public interface DiaryRepsitory extends JpaRepository<Diary, Integer> {
 
     List<Diary> findByCreatedDate(LocalDate createdDate);
 
+    List<Diary> findAll();
+
+
 }

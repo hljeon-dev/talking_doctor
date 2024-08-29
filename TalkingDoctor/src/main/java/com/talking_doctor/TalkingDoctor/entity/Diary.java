@@ -14,7 +14,7 @@ public class Diary {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "diary_id")
-    private int id;
+    private int diaryId;
 
     @NotNull
     @Column(name = "contents")
