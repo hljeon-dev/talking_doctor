@@ -1,4 +1,4 @@
-package com.talking_doctor.TalkingDoctor.dto;
+package com.talking_doctor.TalkingDoctor.dto.diary;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

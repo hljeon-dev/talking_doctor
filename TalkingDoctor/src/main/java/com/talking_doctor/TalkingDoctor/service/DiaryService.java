@@ -1,8 +1,8 @@
 package com.talking_doctor.TalkingDoctor.service;
 
-import com.talking_doctor.TalkingDoctor.dto.DiaryRequest;
-import com.talking_doctor.TalkingDoctor.dto.DiaryResponse;
-import com.talking_doctor.TalkingDoctor.dto.DiaryUpdateRequest;
+import com.talking_doctor.TalkingDoctor.dto.diary.DiaryRequest;
+import com.talking_doctor.TalkingDoctor.dto.diary.DiaryResponse;
+import com.talking_doctor.TalkingDoctor.dto.diary.DiaryUpdateRequest;
 import com.talking_doctor.TalkingDoctor.entity.Diary;
 import com.talking_doctor.TalkingDoctor.mapper.DiaryMapper;
 import com.talking_doctor.TalkingDoctor.repository.DiaryRepsitory;

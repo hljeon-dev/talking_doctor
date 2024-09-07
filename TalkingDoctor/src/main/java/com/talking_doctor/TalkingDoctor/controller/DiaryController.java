@@ -1,12 +1,11 @@
 package com.talking_doctor.TalkingDoctor.controller;
 
-import com.talking_doctor.TalkingDoctor.dto.DiaryRequest;
-import com.talking_doctor.TalkingDoctor.dto.DiaryResponse;
-import com.talking_doctor.TalkingDoctor.dto.DiaryUpdateRequest;
+import com.talking_doctor.TalkingDoctor.dto.diary.DiaryRequest;
+import com.talking_doctor.TalkingDoctor.dto.diary.DiaryResponse;
+import com.talking_doctor.TalkingDoctor.dto.diary.DiaryUpdateRequest;
 import com.talking_doctor.TalkingDoctor.service.DiaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
