@@ -34,7 +34,7 @@ public class SecurityConfiguration {
     @Bean
     public UrlBasedCorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:5173"));
+        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:3000"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         configuration.setExposedHeaders(Arrays.asList("Authorization", "content-type"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "content-type"));
@@ -43,20 +43,18 @@ public class SecurityConfiguration {
         source.registerCorsConfiguration("/api/**", configuration);
         return source;
     }
-/*
-    @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		        http
-                .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/", "/login", "/home").permitAll()
-                        .requestMatchers("/api/**").hasAnyRole("USER")
-                        .anyRequest().authenticated()
-                );
 
-        return http.build();
-    }
-
- */
+//    @Bean
+//    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//		        http
+//                .authorizeHttpRequests((auth) -> auth
+//                        .requestMatchers("/", "/login", "/home").permitAll()
+//                        .requestMatchers("/api/**").hasAnyRole("USER")
+//                        .anyRequest().authenticated()
+//                );
+//
+//        return http.build();
+//    }
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
